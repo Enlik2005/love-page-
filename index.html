@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ru">
 <head>
@@ -183,22 +182,22 @@
   <canvas id="confetti"></canvas>
 
   <div class="card">
-    <div class="badge">💌 14 февраля • секретный вопрос</div>
-    <h1 id="q">Будешь моей валентинкой? 🥺👉👈</h1>
-    <p id="sub">Выбор простой… но “Нет” почему-то не даётся 😈</p>
+    <div class="badge">💌От Енлик</div>
+    <h1 id="q">Будешь моей валентинкой?🥺👉👈</h1>
+    <p id="sub">Выбор простой… но “Нет” почему-то не дается)</p>
 
     <div class="controls" id="controls">
-      <button class="btn" id="yes">Да 💖</button>
+      <button class="btn" id="yes">Да💖</button>
     </div>
 
     <div class="arena" id="arena" aria-label="игровая зона">
-      <button class="btn" id="no">Нет 🙃</button>
+      <button class="btn" id="no">Нет🙃</button>
     </div>
 
     <div class="result" id="result">
       <img id="gif" alt="gif" />
-      <div class="caption" id="caption">УРААА! Ты моя валентинка 💞</div>
-      <div class="tiny">Музыка включилась. Можно сделать скрин и отправить мне 😏</div>
+      <div class="caption" id="caption">УРААА! Поздравляю, теперь ты моя валентинка💞</div>
+      <div class="tiny">Ты еще тут? Иди скорее звать меня на свидание)👉👈</div>
     </div>
   </div>
 
@@ -217,7 +216,7 @@
     const TELEPORT_CHANCE = 0.45;    // чаще телепорт
     const SHRINK_CHANCE = 0.35;      // иногда уменьшается
     const SPIN_CHANCE = 0.25;        // иногда крутится
-    const TEXTS = ["Нет 🙃", "Нееет 😈", "Не поймаешь 😝", "Хаха 😏", "Мимо 💅", "Ой 😳"];
+    const TEXTS = ["Нет🙃", "Нееет😈", "Не поймаешь😝", "Хаха😏", "Мимо💅"];
     // =====================
 
     const arena = document.getElementById('arena');
@@ -409,7 +408,7 @@
       result.style.display = "block";
       arena.style.display = "none";
       controls.style.display = "none";
-      sub.textContent = "Я знала 😏 С днём Валентина заранее!";
+      sub.textContent = "Я знала) С днём Валентина тебя!";
 
       // конфетти
       launchConfetti();
@@ -420,7 +419,7 @@
         await music.play();
       }catch(err){
         // если браузер всё равно блокнул — ничего страшного
-        sub.textContent = "Я знала 😏 (Если музыка не включилась — нажми ещё раз на «Да»)";
+        sub.textContent = "Я знала😏";
         controls.style.display = "block";
         controls.innerHTML = '<button class="btn" id="yes2">Включить музыку 🎵</button>';
         document.getElementById("yes2").addEventListener("click", async ()=>{
