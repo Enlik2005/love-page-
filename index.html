@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Будешь моей валентинкой? 💌</title>
+  <title>Валентинка 💌</title>
 
   <style>
     :root{
-      --bg1:#ffe6f2;
-      --bg2:#ffd1e6;
+      --bg1:#ffe7f2;
+      --bg2:#ffd3e8;
       --card:#ffffffcc;
-      --stroke:#ffb3d6;
+      --stroke: rgba(255, 79, 163, .25);
       --text:#3b1b2a;
       --muted:#7a3a56;
       --accent1:#ff4fa3;
-      --accent2:#ff8fc6;
+      --accent2:#ff93c8;
     }
     *{ box-sizing:border-box; }
     body{
@@ -30,20 +30,18 @@
       color:var(--text);
       overflow:hidden;
     }
-
-    /* плавающие сердечки фон */
-    .hearts{
+    .bg-hearts{
       position:fixed; inset:0;
       pointer-events:none;
-      opacity:.18;
+      opacity:.14;
       background:
-        radial-gradient(circle at 10% 20%, #ff6fb8 0 6px, transparent 7px),
-        radial-gradient(circle at 40% 10%, #ff6fb8 0 5px, transparent 6px),
-        radial-gradient(circle at 80% 25%, #ff6fb8 0 7px, transparent 8px),
-        radial-gradient(circle at 70% 70%, #ff6fb8 0 6px, transparent 7px),
-        radial-gradient(circle at 25% 75%, #ff6fb8 0 7px, transparent 8px);
-      filter: blur(.2px);
+        radial-gradient(circle at 12% 18%, #ff6fb8 0 6px, transparent 7px),
+        radial-gradient(circle at 40% 12%, #ff6fb8 0 5px, transparent 6px),
+        radial-gradient(circle at 78% 24%, #ff6fb8 0 7px, transparent 8px),
+        radial-gradient(circle at 70% 72%, #ff6fb8 0 6px, transparent 7px),
+        radial-gradient(circle at 25% 76%, #ff6fb8 0 7px, transparent 8px);
       animation: floatBg 10s ease-in-out infinite;
+      filter: blur(.2px);
     }
     @keyframes floatBg{
       0%,100%{ transform: translateY(0); }
@@ -53,40 +51,31 @@
     .card{
       width:min(92vw, 460px);
       background: var(--card);
-      border: 1px solid rgba(255,79,163,.25);
+      border: 1px solid var(--stroke);
       border-radius: 26px;
       padding: 22px;
       box-shadow: 0 18px 60px rgba(255,79,163,.18);
-      position:relative;
       text-align:center;
+      position:relative;
       backdrop-filter: blur(8px);
-    }
-
-    h1{
-      margin: 6px 0 8px;
-      font-size: 22px;
-      letter-spacing: .2px;
-    }
-    p{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.35;
     }
 
     .badge{
       display:inline-flex;
-      gap:8px;
       align-items:center;
-      font-weight:800;
+      gap:8px;
+      font-weight:900;
       font-size: 12px;
       padding: 8px 12px;
       border-radius: 999px;
       border: 1px dashed rgba(255,79,163,.35);
-      background: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.72);
       color: rgba(59,27,42,.9);
       margin-bottom: 10px;
     }
+
+    h1{ margin: 6px 0 8px; font-size: 22px; }
+    p{ margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.35; }
 
     .controls{ margin-top: 10px; }
 
@@ -98,8 +87,9 @@
       font-weight: 900;
       cursor: pointer;
       user-select:none;
-      transition: transform .08s ease, filter .12s ease;
-      will-change: transform;
+      transition: transform .08s ease, filter .12s ease, left .18s ease, top .18s ease;
+      will-change: transform, left, top;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn:active{ transform: scale(.98); }
 
@@ -110,10 +100,9 @@
       margin-bottom: 10px;
     }
 
-    /* зона охоты на "нет" */
     .arena{
       position:relative;
-      height: 220px;
+      height: 230px;
       border-radius: 22px;
       background: rgba(255,255,255,.55);
       border: 1px dashed rgba(255,79,163,.32);
@@ -126,14 +115,13 @@
       left: 55%;
       top: 60%;
       transform: translate(-50%,-50%);
-      background: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.88);
       color: rgba(59,27,42,.95);
       border: 1px solid rgba(255,79,163,.35);
       box-shadow: 0 10px 18px rgba(255,79,163,.14);
       backdrop-filter: blur(6px);
     }
 
-    /* злее: дрожь + “прыжок” */
     .panic{
       animation: panic .12s linear 2;
       filter: saturate(1.2);
@@ -146,7 +134,19 @@
       100%{ transform: translate(var(--tx), var(--ty)) rotate(0deg) scale(1); }
     }
 
-    /* результат */
+    .taunt{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,79,163,.25);
+      background: rgba(255,255,255,.75);
+      color: rgba(59,27,42,.95);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    /* финал */
     .result{ display:none; margin-top: 14px; }
     .result img{
       width: 100%;
@@ -157,8 +157,8 @@
     }
     .caption{
       margin-top: 10px;
-      font-size: 16px;
-      font-weight: 900;
+      font-size: 18px;
+      font-weight: 1000;
       color: rgba(59,27,42,.95);
     }
     .tiny{
@@ -167,78 +167,156 @@
       color: rgba(122,58,86,.85);
     }
 
-    /* конфетти */
-    canvas#confetti{
+    /* сердечки */
+    canvas#hearts{
       position:fixed;
       inset:0;
       pointer-events:none;
       z-index: 9999;
+      display:none;
+    }
+
+    /* модалка */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      display:none;
+      place-items:center;
+      background: rgba(0,0,0,.25);
+      z-index: 10000;
+      padding: 18px;
+    }
+    .modal{
+      width:min(92vw, 420px);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,79,163,.25);
+      border-radius: 22px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.18);
+      padding: 16px;
+      text-align:center;
+    }
+    .modal h2{
+      margin: 6px 0 8px;
+      font-size: 18px;
+      color: rgba(59,27,42,.95);
+    }
+    .modal p{
+      margin: 0 0 12px;
+      color: rgba(122,58,86,.95);
+      font-size: 13px;
+    }
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+    }
+    .mbtn{
+      border:0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 900;
+      cursor:pointer;
+    }
+    .m-yes{
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color:#fff;
+    }
+    .m-no{
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,79,163,.3);
+      color: rgba(59,27,42,.95);
     }
   </style>
 </head>
 
 <body>
-  <div class="hearts"></div>
-  <canvas id="confetti"></canvas>
+  <div class="bg-hearts"></div>
+  <canvas id="hearts"></canvas>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2 id="modalTitle">Вы точно уверены? 🙂</h2>
+      <p id="modalText">Ну подумай ещё разочек…</p>
+      <div class="modal-actions">
+        <button class="mbtn m-yes" id="modalYes">Да</button>
+        <button class="mbtn m-no" id="modalNo">Нет</button>
+      </div>
+    </div>
+  </div>
 
   <div class="card">
-    <div class="badge">💌От Енлик</div>
-    <h1 id="q">Будешь моей валентинкой?🥺👉👈</h1>
-    <p id="sub">Выбор простой… но “Нет” почему-то не дается)</p>
+    <div class="badge">От Енлик💌</div>
 
-    <div class="controls" id="controls">
-      <button class="btn" id="yes">Да💖</button>
-    </div>
+    <div id="questionBlock">
+      <h1>Вы будете моей валентинкой?👉👈</h1>
+      <p>Только попробуйте нажать «Нет»😈</p>
 
-    <div class="arena" id="arena" aria-label="игровая зона">
-      <button class="btn" id="no">Нет🙃</button>
+      <div class="controls">
+        <button class="btn" id="yes">Да💖</button>
+      </div>
+
+      <div class="arena" id="arena">
+        <button class="btn" id="no">Нет🙃</button>
+      </div>
+
+      <div class="taunt" id="taunt"></div>
     </div>
 
     <div class="result" id="result">
       <img id="gif" alt="gif" />
-      <div class="caption" id="caption">УРААА! Поздравляю, теперь ты моя валентинка💞</div>
-      <div class="tiny">Ты еще тут? Иди скорее звать меня на свидание)👉👈</div>
+      <div class="caption">Урааа, теперь официально: вы моя валентинка 💌 💞</div>
+      <div class="tiny">Ой. а почему вы до сих пор тут? Идите скорее звать меня на свидание)</div>
     </div>
   </div>
-
-  <!-- Музыка: вставь свой mp3-файл ссылкой или оставь эту -->
- <audio id="music" preload="auto" playsinline>
-  <source src="./careless-whisper.mp3" type="audio/mpeg">
-  </audio>
 
   <script>
     // ===== НАСТРОЙКИ =====
     const GIF_URL = "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif";
 
-    // “Нет” ещё жёстче:
-    const TRIGGER_RADIUS = 170;      // убегает раньше
-    const EVASION_DISTANCE = 210;    // дальше прыгает
-    const TELEPORT_CHANCE = 0.45;    // чаще телепорт
-    const SHRINK_CHANCE = 0.35;      // иногда уменьшается
-    const SPIN_CHANCE = 0.25;        // иногда крутится
-    const TEXTS = ["Нет🙃", "Нееет😈", "Не поймаешь😝", "Хаха😏", "Мимо💅"];
+    const TRIGGER_RADIUS = 160;
+    const EVASION_DISTANCE = 190;
+    const TELEPORT_CHANCE = 0.35;
+    const SHRINK_CHANCE = 0.25;
+    const SPIN_CHANCE = 0.20;
+    const TEXTS = ["Нет🙃","Нееет😈","Не поймаешь😝","Мимо💅","Хаха😏","Неа🫶"];
     // =====================
 
     const arena = document.getElementById('arena');
     const noBtn = document.getElementById('no');
     const yesBtn = document.getElementById('yes');
-    const controls = document.getElementById('controls');
+
+    const questionBlock = document.getElementById('questionBlock');
     const result = document.getElementById('result');
     const gif = document.getElementById('gif');
-    const caption = document.getElementById('caption');
-    const sub = document.getElementById('sub');
-    const music = document.getElementById('music');
+    const taunt = document.getElementById('taunt');
 
-    // ---- утилиты ----
+    // модалка
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const modalYes = document.getElementById('modalYes');
+    const modalNo = document.getElementById('modalNo');
+
+    let noAttempts = 0;
+    let modalStep = 0; // 1,2...
+
     const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
-    function randomPos(){
-      const pad = 10;
-      const a = arena.getBoundingClientRect();
-      const b = noBtn.getBoundingClientRect();
-      const maxX = a.width  - b.width  - pad;
-      const maxY = a.height - b.height - pad;
-      return { x: Math.random() * maxX + pad, y: Math.random() * maxY + pad, a, b, pad };
+    function panicAnim(){
+      noBtn.classList.remove("panic");
+      void noBtn.offsetWidth;
+      noBtn.classList.add("panic");
+    }
+
+    function spiceNo(){
+      noBtn.textContent = TEXTS[Math.floor(Math.random()*TEXTS.length)];
+      if (Math.random() < SHRINK_CHANCE){
+        noBtn.style.transform = "scale(0.86)";
+        setTimeout(() => { noBtn.style.transform = "none"; }, 170);
+      }
+      if (Math.random() < SPIN_CHANCE){
+        noBtn.style.transform = "rotate(" + (Math.random()<0.5 ? "-" : "") + "12deg)";
+        setTimeout(() => { noBtn.style.transform = "none"; }, 170);
+      }
     }
 
     function setNoPos(x,y){
@@ -249,31 +327,19 @@
       noBtn.style.setProperty("--ty","0px");
     }
 
-    function spiceNo(){
-      // меняем текст
-      noBtn.textContent = TEXTS[Math.floor(Math.random()*TEXTS.length)];
-
-      // иногда уменьшаем кнопку (злее)
-      if (Math.random() < SHRINK_CHANCE){
-        noBtn.style.transform = "scale(0.85)";
-        setTimeout(() => { noBtn.style.transform = "none"; }, 180);
-      }
-
-      // иногда крутим
-      if (Math.random() < SPIN_CHANCE){
-        noBtn.style.transform = "rotate(" + (Math.random() < 0.5 ? "-" : "") + "12deg)";
-        setTimeout(() => { noBtn.style.transform = "none"; }, 180);
-      }
+    function randomPos(){
+      const pad = 10;
+      const a = arena.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const maxX = a.width  - b.width  - pad;
+      const maxY = a.height - b.height - pad;
+      return { x: Math.random()*maxX + pad, y: Math.random()*maxY + pad, a, b };
     }
 
-    function panicAnim(){
-      noBtn.classList.remove("panic");
-      void noBtn.offsetWidth;
-      noBtn.classList.add("panic");
-    }
-
-    // убегает по вектору от пальца/курсора
     function evade(clientX, clientY){
+      // если уже пошли модалки — не мешаем
+      if (modalBackdrop.style.display === "grid") return;
+
       const a = arena.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
 
@@ -285,24 +351,21 @@
 
       const dx = btnCenterX - px;
       const dy = btnCenterY - py;
-      const dist = Math.hypot(dx, dy) || 1;
 
+      const dist = Math.hypot(dx, dy) || 1;
       if (dist > TRIGGER_RADIUS) return;
 
       const ux = dx / dist;
       const uy = dy / dist;
 
-      // базовый прыжок
       let targetX = (btnCenterX + ux * EVASION_DISTANCE) - b.width/2;
       let targetY = (btnCenterY + uy * EVASION_DISTANCE) - b.height/2;
 
-      // телепорт
       if (Math.random() < TELEPORT_CHANCE){
         targetX = (a.width  - (b.left - a.left) - b.width);
         targetY = (a.height - (b.top  - a.top ) - b.height);
       }
 
-      // ограничение
       const pad = 8;
       targetX = clamp(targetX, pad, a.width  - b.width  - pad);
       targetY = clamp(targetY, pad, a.height - b.height - pad);
@@ -312,126 +375,152 @@
       setNoPos(targetX, targetY);
     }
 
-    // ПК: приближение мыши
-    arena.addEventListener("mousemove", e => evade(e.clientX, e.clientY));
+    function openModal(step){
+      modalStep = step;
+      modalBackdrop.style.display = "grid";
 
-    // Телефон: палец
-    arena.addEventListener("touchstart", e => {
-      const t = e.touches[0];
-      evade(t.clientX, t.clientY);
-    }, { passive:true });
+      if (step === 1){
+        modalTitle.textContent = "Вы точно уверены? 🙂";
+        modalText.textContent = "Подумайте еще разочек…";
+      } else if (step === 2){
+        modalTitle.textContent = "Точно-точно уверены? 🥺";
+        modalText.textContent = "Последний шанс, вы ведь можете упустить свое счастье)💘";
+      }
+    }
 
-    arena.addEventListener("touchmove", e => {
-      const t = e.touches[0];
-      evade(t.clientX, t.clientY);
-    }, { passive:true });
+    function closeModal(){
+      modalBackdrop.style.display = "none";
+    }
 
-    // попытка нажать = мгновенный рандом-скачок
-    ["pointerdown","mouseenter","touchstart"].forEach(evt => {
-      noBtn.addEventListener(evt, (e) => {
-        e.preventDefault?.();
-        const { x,y } = randomPos();
-        spiceNo();
-        panicAnim();
-        setNoPos(x,y);
-      }, { passive:false });
+    function showTaunt(){
+      taunt.style.display = "block";
+      taunt.textContent = "Пф, размечтался 😌 Выбора нет, нажимай на «Да»";
+      spiceNo();
+      panicAnim();
+      const {x,y} = randomPos();
+      setNoPos(x,y);
+    }
+
+    function showFinal(){
+      questionBlock.style.display = "none";
+      gif.src = GIF_URL;
+      result.style.display = "block";
+      startHearts();
+    }
+
+    // модалка кнопки
+    modalYes.addEventListener("click", () => {
+      closeModal();
+      showFinal();
     });
 
-    // ---- КОНФЕТТИ ----
-    const canvas = document.getElementById("confetti");
-    const ctx = canvas.getContext("2d");
-    let pieces = [], animId = null;
+    modalNo.addEventListener("click", () => {
+      if (modalStep === 1){
+        openModal(2);
+        return;
+      }
+      // второй раз нажали "Нет" в модалках
+      closeModal();
+      showTaunt();
+    });
 
-    function resize(){
+    yesBtn.addEventListener("click", showFinal);
+
+    // убегание заранее
+    arena.addEventListener("mousemove", (e) => evade(e.clientX, e.clientY));
+    arena.addEventListener("touchmove", (e) => {
+      const t = e.touches[0];
+      evade(t.clientX, t.clientY);
+    }, { passive:true });
+
+    // попытки нажать "Нет" — считаем на pointerdown (самый стабильный вариант)
+    noBtn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      if (modalBackdrop.style.display === "grid") return;
+
+      noAttempts++;
+
+      if (noAttempts >= 5){
+        openModal(1);
+        return;
+      }
+
+      // обычное убегание
+      spiceNo();
+      panicAnim();
+      const {x,y} = randomPos();
+      setNoPos(x,y);
+    }, { passive:false });
+
+    // стартовая позиция
+    const start = randomPos();
+    setNoPos(start.x, start.y);
+
+    // ===== Сердечки Canvas =====
+    const canvas = document.getElementById("hearts");
+    const ctx = canvas.getContext("2d");
+    let pieces = [];
+    let animId = null;
+
+    function resize() {
       canvas.width = window.innerWidth * devicePixelRatio;
       canvas.height = window.innerHeight * devicePixelRatio;
-      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     }
     window.addEventListener("resize", resize);
     resize();
 
-    function makeConfetti(count=260){
+    function heartPath(x, y, size) {
+      ctx.beginPath();
+      const top = size * 0.3;
+      ctx.moveTo(x, y + top);
+      ctx.bezierCurveTo(x, y, x - size/2, y, x - size/2, y + top);
+      ctx.bezierCurveTo(x - size/2, y + (size + top)/2, x, y + (size + top)/1.2, x, y + size);
+      ctx.bezierCurveTo(x, y + (size + top)/1.2, x + size/2, y + (size + top)/2, x + size/2, y + top);
+      ctx.bezierCurveTo(x + size/2, y, x, y, x, y + top);
+      ctx.closePath();
+    }
+
+    function makeHearts(count=160) {
       pieces = Array.from({length: count}, () => ({
         x: Math.random() * window.innerWidth,
-        y: -20 - Math.random()*300,
-        r: 4 + Math.random()*7,
-        vx: -2.5 + Math.random()*5,
-        vy: 3.5 + Math.random()*6.5,
-        rot: Math.random()*Math.PI,
-        vr: -0.2 + Math.random()*0.4,
-        color: `hsla(${Math.floor(Math.random()*360)}, 95%, 65%, 0.95)`,
-        shape: Math.random() < 0.55 ? "rect" : "circle"
+        y: -20 - Math.random() * 400,
+        s: 10 + Math.random() * 14,
+        vx: -0.8 + Math.random() * 1.6,
+        vy: 1.8 + Math.random() * 3.2,
+        a: 0.55 + Math.random() * 0.35
       }));
     }
 
-    function draw(){
-      ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-      for (const p of pieces){
+    function drawHearts() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (const p of pieces) {
         p.x += p.vx;
         p.y += p.vy;
-        p.rot += p.vr;
-        p.vy += 0.02;
+        p.vy += 0.006;
 
         ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
-        ctx.fillStyle = p.color;
-
-        if (p.shape === "rect"){
-          ctx.fillRect(-p.r, -p.r/2, p.r*2, p.r);
-        } else {
-          ctx.beginPath();
-          ctx.arc(0,0,p.r/1.6,0,Math.PI*2);
-          ctx.fill();
-        }
+        ctx.globalAlpha = p.a;
+        ctx.fillStyle = "rgba(255, 79, 163, 0.95)";
+        heartPath(p.x, p.y, p.s);
+        ctx.fill();
         ctx.restore();
+
+        if (p.y > window.innerHeight + 60) {
+          p.y = -30 - Math.random() * 200;
+          p.x = Math.random() * window.innerWidth;
+          p.vy = 1.8 + Math.random() * 3.2;
+        }
       }
-      const alive = pieces.some(p => p.y < window.innerHeight + 50);
-      if (alive) animId = requestAnimationFrame(draw);
-      else {
-        cancelAnimationFrame(animId);
-        animId = null;
-        ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-      }
+      animId = requestAnimationFrame(drawHearts);
     }
 
-    function launchConfetti(){
-      makeConfetti(300);
-      if (!animId) draw();
+    function startHearts() {
+      canvas.style.display = "block";
+      makeHearts(170);
+      if (!animId) drawHearts();
     }
-
-    // ---- ДА ----
-    yesBtn.addEventListener("click", async () => {
-      // показать результат
-      gif.src = GIF_URL;
-      caption.textContent = "УРААА! Ты моя валентинка 💞";
-      result.style.display = "block";
-      arena.style.display = "none";
-      controls.style.display = "none";
-      sub.textContent = "Я знала) С днём Валентина тебя!";
-
-      // конфетти
-      launchConfetti();
-
-      // музыка (после клика — можно)
-      try{
-        music.volume = 0.75;
-        await music.play();
-      }catch(err){
-        // если браузер всё равно блокнул — ничего страшного
-        sub.textContent = "Я знала😏";
-        controls.style.display = "block";
-        controls.innerHTML = '<button class="btn" id="yes2">Включить музыку 🎵</button>';
-        document.getElementById("yes2").addEventListener("click", async ()=>{
-          try{ await music.play(); }catch(e){}
-          controls.style.display = "none";
-        });
-      }
-    });
-
-    // старт
-    const start = randomPos();
-    setNoPos(start.x, start.y);
   </script>
 </body>
 </html>
