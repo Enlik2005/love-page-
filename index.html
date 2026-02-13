@@ -234,7 +234,7 @@
 
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
     <div class="modal">
-      <h2 id="modalTitle">Вы точно уверены? 🙂</h2>
+      <h2 id="modalTitle">Ты точно уверена? 🙂</h2>
       <p id="modalText">Ну подумай ещё разочек…</p>
       <div class="modal-actions">
         <button class="mbtn m-yes" id="modalYes">Да</button>
@@ -244,10 +244,10 @@
   </div>
 
   <div class="card">
-    <div class="badge">От Енлик💌</div>
+    <div class="badge">For Merey💌</div>
 
     <div id="questionBlock">
-      <h1>Вы будете моей валентинкой?👉👈</h1>
+      <h1>Ты будешь моей валентинкой?👉👈</h1>
       <p>Только попробуйте нажать «Нет»😈</p>
 
       <div class="controls">
@@ -263,8 +263,8 @@
 
     <div class="result" id="result">
       <img id="gif" alt="gif" />
-      <div class="caption">Урааа, теперь официально: вы моя валентинка 💌 💞</div>
-      <div class="tiny">Ой. а почему вы до сих пор тут? Идите скорее звать меня на свидание)</div>
+      <div class="caption">Урааа, теперь официально: ты моя валентинка 💌 💞</div>
+      <div class="tiny"> Ты самая прекрасная девушка которую я встречал </div>
     </div>
   </div>
 
@@ -380,11 +380,11 @@
       modalBackdrop.style.display = "grid";
 
       if (step === 1){
-        modalTitle.textContent = "Вы точно уверены? 🙂";
+        modalTitle.textContent = "Ты точно уверена? 🙂";
         modalText.textContent = "Подумайте еще разочек…";
       } else if (step === 2){
-        modalTitle.textContent = "Точно-точно уверены? 🥺";
-        modalText.textContent = "Последний шанс, вы ведь можете упустить свое счастье)💘";
+        modalTitle.textContent = "Точно-точно уверена? 🥺";
+        modalText.textContent = "Последний шанс";
       }
     }
 
@@ -394,7 +394,7 @@
 
     function showTaunt(){
       taunt.style.display = "block";
-      taunt.textContent = "Пф, размечтался 😌 Выбора нет, нажимай на «Да»";
+      taunt.textContent = "Пф, размечталась 😌 Выбора нет, нажимай на «Да»";
       spiceNo();
       panicAnim();
       const {x,y} = randomPos();
